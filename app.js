@@ -86,8 +86,11 @@ passport.deserializeUser( function (id, done) {
 
 // when a guest wants to sign up
 app.get('/signup', function (req, res) {
-    res.render
-    ('users/signup');
+  if ( req.user ) {
+    res.render ('users/signup', { title: 'signup', user : req.user });
+  } else {
+    res.render ('users/signup', { title: 'signup', user : false    });
+  }
 });
 
 // guest signs up to be a newUser. Creates newUser || redirects to signup page
@@ -122,7 +125,11 @@ app.post('/users', function (req, res) {
 
 // when existingUser wants login page
 app.get('/login', function (req, res) {
-    res.render ('users/login');
+  if ( req.user ) {
+    res.render ('users/login', { title: 'login', user : req.user });
+  } else {
+    res.render ('users/login', { title: 'login', user : false    });
+  }
 });
 
 // after existingUser signs in; routes to their profile. if(err) redirect-> signup
@@ -152,15 +159,10 @@ app.post('/login',
 
 // when loading site root, check if Guest or User, then pass {} into site root
 app.get('/', function (req, res) {
-  console.log 
-  ( req.user );
-  
   if ( req.user ) {
-    res.render
-    ( 'site/index', { title: 'homepage', user : req.user });
+    res.render ( 'site/index', { title: 'homepage', user : req.user });
   } else {
-    res.render
-    ( 'site/index', { title: 'homepage', user : false    });
+    res.render ( 'site/index', { title: 'homepage', user : false    });
   }
 });
 
@@ -177,25 +179,49 @@ app.get('/logout', function (req, res) {
  *******************************************************************************
 *******************************************************************************/
 
-// when a guest visits site root
-app.get('/', function (req, res) {
-  res.render('site/index', {
-    title: 'homepage'
-  });
-});
-
 // when a guest visits about page
 app.get('/about', function (req, res) {
-  res.render('site/about', {
-    title: 'about'
-  });
+  if ( req.user ) {
+    res.render ('site/about', { title: 'about', user : req.user });
+  } else {
+    res.render ('site/about', { title: 'about', user : false    });
+  }
 });
 
 // when a guest visits contact page
 app.get('/contact', function (req, res) {
-  res.render('site/contact', {
-    title: 'contact'
-  });
+  if ( req.user ) {
+    res.render ('site/contact', { title: 'contact', user : req.user });
+  } else {
+    res.render ('site/contact', { title: 'contact', user : false    });
+  }
+});
+
+// when a guest visits event homepage
+app.get('/event', function (req, res) {
+  if ( req.user ){
+    res.render ('events/index', { title: 'events', user : req.user });
+  } else {
+    res.render ('events/index', { title: 'events', user : false });
+  }
+});
+
+// when a guest visits gift homepage
+app.get('/gifts', function (req, res) {
+  if ( req.user ){
+    res.render ('events/gifts', { title: 'gifts', user : req.user });
+  } else {
+    res.render ('events/gifts', { title: 'gifts', user : false });
+  }
+});
+
+// when a guest visits guestbook homepage
+app.get('/guestbook', function (req, res) {
+  if ( req.user ){
+    res.render ('events/guestbook', { title: 'guestbook', user : req.user });
+  } else {
+    res.render ('events/guestbook', { title: 'guestbook', user : false });
+  }
 });
 
 

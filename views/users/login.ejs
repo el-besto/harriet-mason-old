@@ -1,13 +1,26 @@
 <!--views/users/login.ejs-->
 <% include ../header %>
-    The Login Page!
-    <form method="post" action="/login">
-      <div>
-        <input type="text" name="user[email]" placeholder="Email">
-      </div>
-      <div>
-        <input type="text" name="user[password]" placeholder="Password">
-      </div>
-      <button>Save </button>
-    </form>
+  <div class="row">
+    <div class="small-12 small-centered large-10 large-centered columns">
+      
+      <form method="POST" action="/login">
+        <fieldset>
+          
+          <legend>Login</legend>
+          
+          <label>Username
+            <input type="text" name="user[email]" placeholder="valid email address">
+          </label>
+          
+          <label>Password
+            <input type="text" name="user[password]" placeholder="password must be at least 8 characters">
+          </label>
+
+          <button class="expand">save</button>
+        
+        </fieldset>
+      </form>
+    
+    </div>
+  </div>
 <% include ../footer %>
