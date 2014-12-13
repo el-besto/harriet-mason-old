@@ -1,0 +1,30 @@
+{
+  "name": "harrietMasonsApp",
+  "version": "1.0.0",
+  "description": "## A site for Harriet Mason to Share Thoughts",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/el-besto/harriet-mason.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/el-besto/harriet-mason.git/issues"
+  },
+  "homepage": "https://github.com/el-besto/harriet-mason.git",
+  "dependencies": {
+    "bcrypt": "^0.8.0",
+    "body-parser": "^1.10.0",
+    "cookie-session": "^1.1.0",
+    "ejs": "^1.0.0",
+    "express": "^4.10.4",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
+    "pg": "^4.1.0",
+    "sequelize": "^2.0.0-rc3"
+  }
+}
