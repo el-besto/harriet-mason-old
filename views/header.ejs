@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
-  <!-- <link rel="stylesheet" href="/css/style.css"> -->
-  <!-- <script src="http://localhost:35729/livereload.js"></script> -->
+<!-- Harriet's site had to support as many different browsers as possible considering
+the guest list has many elderly folks. Found article to help Foundation 5 framework
+work on IE 8 and 9 here: http://foundation.zurb.com/forum/posts/241-foundation-5-and-ie8
+
+Additionally, needed a way to render rem units, so used method found using
+rem-unit-polyfill here: http://chuckcarpenter.github.io/REM-unit-polyfill/ -->
+
+<!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+  <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+  <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+<![endif]-->
+
+  <link rel="stylesheet" href="styles/css/foundation.css" />
+  <script src="js/vendor/modernizr.js"></script>
+
 </head>
 <body>

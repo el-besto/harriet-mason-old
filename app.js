@@ -176,11 +176,28 @@ app.get('/logout', function (req, res) {
  **
  *******************************************************************************
 *******************************************************************************/
+
+// when a guest visits site root
 app.get('/', function (req, res) {
   res.render('site/index', {
     title: 'homepage'
   });
 });
+
+// when a guest visits about page
+app.get('/about', function (req, res) {
+  res.render('site/about', {
+    title: 'about'
+  });
+});
+
+// when a guest visits contact page
+app.get('/contact', function (req, res) {
+  res.render('site/contact', {
+    title: 'contact'
+  });
+});
+
 
 /*******************************************************************************
  *******************************************************************************
