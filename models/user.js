@@ -6,8 +6,16 @@ var bcrypt        = require('bcrypt'),
 
 module.exports = function(sequelize, DataTypes) {
   var user = sequelize.define("user", {
-                                       email           : DataTypes.STRING,
-                                       password_digest : DataTypes.STRING
+                                        email: {
+                                                type: DataTypes.STRING,
+                                                allowNull: false,
+                                                validate: {isEmail: true}
+                                        },
+                                       password_digest: {
+                                        type: DataTypes.STRING,
+                                        allowNull: false
+                                        // validate: {notNull:true, notEmpty:true, len: [8,20], notContains: 'password'}
+                                      }
   }, {
     instanceMethods: {
       checkPassword: function (password) {

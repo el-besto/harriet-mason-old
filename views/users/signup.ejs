@@ -1,6 +1,9 @@
 <!--views/users/signup.ejs-->
 <% include ../header %>
     Signup
+    <p>
+      password must be between 8-20 characters
+    </p>
     <form method="post" action="/users">
       <div>
         <input type="text" name="user[email]" placeholder="Email">

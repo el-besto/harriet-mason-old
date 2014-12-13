@@ -122,8 +122,7 @@ app.post('/users', function (req, res) {
 
 // when existingUser wants login page
 app.get('/login', function (req, res) {
-    res.render
-    ('users/login');
+    res.render ('users/login');
 });
 
 // after existingUser signs in; routes to their profile. if(err) redirect-> signup
