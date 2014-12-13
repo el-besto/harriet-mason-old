@@ -1,9 +1,7 @@
+<% include ../header %>
 
-<!--views/site/index.ejs-->
-<!DOCTYPE HTML>
-<html>
-<body>
-<h1>Site index</h1>
+  <h1><%-title %></h1>
+  <p>Welcome to <%-title %></p>
   <% if (user) { %>
     Logged in as <%= user.email %><br>
     <a href="/logout">Logout</a>
@@ -16,5 +14,8 @@
       <a href="/signup">Sign Up</a>
     </div>
   <% } %>
-</body>
-</html>
+
+<% include ../footer %>
+
+
+

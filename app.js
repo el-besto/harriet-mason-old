@@ -155,16 +155,29 @@ app.get('/', function (req, res) {
   
   if ( req.user ) {
     res.render
-    ( 'site/index', { user : req.user });
+    ( 'site/index', { title: 'homepage', user : req.user });
   } else {
     res.render
-    ( 'site/index', { user : false    });
+    ( 'site/index', { title: 'homepage', user : false    });
   }
 });
 
 app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
+});
+
+/*******************************************************************************
+ *******************************************************************************
+ **
+ ** STATIC SITE ROUTES
+ **
+ *******************************************************************************
+*******************************************************************************/
+app.get('/', function (req, res) {
+  res.render('site/index', {
+    title: 'homepage'
+  });
 });
 
 /*******************************************************************************

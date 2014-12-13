@@ -1,7 +1,5 @@
 <!--views/users/show.ejs-->
-<!DOCTYPE HTML>
-<html>
-<body>
+<% include ../header %>
 <h1>users/show</h1>
   <div>
     <%= user.email %>
@@ -9,5 +7,4 @@
       <%= user.password_digest %>
     </div>
   </div>
-</body>
-</html>
+<% include ../footer %>
