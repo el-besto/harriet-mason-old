@@ -1,8 +1,6 @@
 <!--views/site/index.ejs-->
 <% include ../header %>
 
-  <h1><%-title %></h1>
-  <p>Welcome to <%-title %></p>
   <% if (user) { %>
     Logged in as <%= user.email %><br>
     <a href="/logout">Logout</a>
