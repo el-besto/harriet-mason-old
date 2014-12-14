@@ -22,6 +22,7 @@ var express        = require('express'),
     passport       = require('passport'),
     session        = require('cookie-session'),
     methodOverride = require('method-override'),
+    request        = require("request"),
     app            = express();
 
 /*******************************************************************************
@@ -184,6 +185,43 @@ app.get('/logout', function (req, res) {
 /*******************************************************************************
  *******************************************************************************
  **
+ ** EVENTBRITE
+ **
+ *******************************************************************************
+*******************************************************************************/
+
+// when a guest visits event homepage
+app.get('/event', function(req, res){
+  var url = "https://www.eventbriteapi.com/v3/events/14937457337/\?token\=UMLWCDAJ3ZMD67BD5VGZ";
+
+  if ( req.user ) {
+    request(url, function(error, response, body) {
+      if(!error && response.statusCode == 200) {
+        var obj = JSON.parse(body);
+        res.render('events/index', {
+                                    title: 'events', 
+                                    user : req.user, 
+                                    event: obj
+                                   })
+      }
+    });
+  } else {
+    request(url, function(error, response, body) {
+      if(!error && response.statusCode == 200) {
+        var obj = JSON.parse(body);
+        res.render('events/index', {
+                                    title: 'events',
+                                    user : false,
+                                    event: obj
+                                   })
+      }
+    });
+  }
+});
+
+/*******************************************************************************
+ *******************************************************************************
+ **
  ** STATIC SITE ROUTES
  **
  *******************************************************************************
@@ -204,15 +242,6 @@ app.get('/contact', function (req, res) {
     res.render ('site/contact', { title: 'contact', user : req.user });
   } else {
     res.render ('site/contact', { title: 'contact', user : false    });
-  }
-});
-
-// when a guest visits event homepage
-app.get('/event', function (req, res) {
-  if ( req.user ){
-    res.render ('events/index', { title: 'events', user : req.user });
-  } else {
-    res.render ('events/index', { title: 'events', user : false });
   }
 });
 

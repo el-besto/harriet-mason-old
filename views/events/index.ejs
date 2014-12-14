@@ -4,44 +4,56 @@
 <div class="row">
   <div class="large-9 columns">
     
-    <h1>Celebrating 85 <small>Meriwether's Restaurant &amp; Skyline Farm</small></h1>
-    
-    <div class="panel callout">
-      200PM-430PM
-      Sat Apr 18
-      Max guests 120
-    </div>
-    
-    <div class="panel callout">
-      2601 Northwest Vaughn Street, Portland, OR 97210
-      (503) 228-1250
-    </div>
+    <h1><%= event.name.text %></h1>
   
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="large-9 columns">
     
-    <h2>Get Directions</h2>
-    
-    <div class="panel callout">
-      Event Info – specifics on event and venue, including way to RSVP [also info for out of town guests – a separate page?] [also want to ask people to offer to contribute pics, ideas, song suggestions, speeches at event]
-    </div>
-
+    <img src="img/e122.jpg" alt="" />
+  
   </div>
-</div>
+</div> -->
 
 <div class="row">
   <div class="large-9 columns">
     
-    <h2>Get Directions</h2>
+    <h2>Event Details</h2>
     
     <div class="panel callout">
-      <a href="/faq">Frequently Asked Questions</a>
-      
+      <%= event.description.text %>
     </div>
 
+    <div class="panel">
+      <p>
+        date: <%= event.start.local %> to <%= event.end.local %> <br>
+        <em>how I would like to to look </em><br>
+        Saturday April 18, 2015 <br>
+        2:00 PM - 4:30 PM
+      </p> 
+    </div>
+    
+    <div class="panel">
+      <a href="https://www.meriwethersnw.com/contact-hours">
+        <b><%= event.venue.name %></b>
+      </a><br>
+      <%= event.venue.address.address_1 %> <br>
+      <%= event.venue.address.city %>, 
+      <%= event.venue.address.region %> 
+      <%= event.venue.address.postal_code %> <br>
+      telephone: (503) 228-1250
+    </div>
+
+    <div>
+      <a href="/rsvp"><button class="expand">RSVP</button></a>
+    </div>
+
+    <div>
+      <a href="https://www.google.com/maps/dir/'current location'/meriwether's+restaurant+portland/data=!4m5!4m4!1m0!1m2!1m1!1s0x549509e62b5ac591:0x97449a9cccde7661?sa=X&ei=GvONVJKmIsfroASixoCAAw&ved=0CJEBEPUXMA0" target="_blank"><button class="expand">Directions</button></a>
+    </div>
+  
   </div>
 </div>
 
