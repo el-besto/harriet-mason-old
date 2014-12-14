@@ -1,17 +1,26 @@
 <!--views/users/signup.ejs-->
 <% include ../header %>
-    Signup
-    <p>
-      Password must be between 8-20 characters
-      Username must be valid email address
-    </p>
-    <form method="post" action="/users">
-      <div>
-        <input type="text" name="user[email]" placeholder="Email">
-      </div>
-      <div>
-        <input type="text" name="user[password]" placeholder="Password">
-      </div>
-      <button>Save </button>
-    </form>
-<% include ../footer %> 
+  <div class="row">
+    <div class="small-12 small-centered large-8 large-centered columns">
+      
+      <form method="POST" action="/users">
+        <fieldset>
+          
+          <legend>Sign Up</legend>
+          
+          <label>Username
+            <input type="text" name="user[email]" placeholder="valid email address">
+          </label>
+          
+          <label>Password
+            <input type="text" name="user[password]" placeholder="password must be at least 8 characters">
+          </label>
+
+          <button class="expand">save</button>
+        
+        </fieldset>
+      </form>
+    
+    </div>
+  </div>
+<% include ../footer %>
