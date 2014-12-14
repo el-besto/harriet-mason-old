@@ -1,18 +1,15 @@
 <!--views/site/index.ejs-->
 <% include ../header %>
-
-  <% if (user) { %>
-    Logged in as <%= user.email %><br>
-    <a href="/logout">Logout</a>
-  <% } else { %>
-    Welcome to our site
-    <div>
-      <a href="/login">Log In </a>
-    </div>
-    <div>
-      <a href="/signup">Sign Up</a>
-    </div>
-  <% } %>
+  
+  <div class="row">
+    <!-- <div class="small-12 small-centered medium-12 medium-centered large-12 large-centered columns"> -->
+      <div class="single-item responsive center">
+        <div><img src="img/e122.jpg" alt=""></div>
+        <div><img src="img/e125.jpg" alt=""></div>
+        <div><img src="img/e126.jpg" alt=""></div>
+      </div>
+   <!--  </div> -->
+  </div>
 
 <% include ../footer %>
 

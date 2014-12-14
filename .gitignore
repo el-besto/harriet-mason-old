@@ -1,5 +1,8 @@
 .DS_Store
 harriet-mason.sublime-project
+harriet-mason-dev.sublime-project
+harriet-mason-dev.sublime-workspace
 node_modules/
 config/
 migrations/
+public/img/
