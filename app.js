@@ -37,6 +37,16 @@ app.use( express.static(__dirname + '/public'));
 app.use( bodyParser.urlencoded( { extended:true } ));
 app.use( methodOverride('_method'));
 
+// // setup node-gallery
+// app.use(gallery.middleware({static: 'resources', directory: '/photos', rootURL: "/gallery"}));
+
+// // now, our middleware does gallery lookups for every URL under rootURL - e.g. /gallery
+// app.get('/gallery*', function(req, res){
+//   // We automatically have the gallery data available to us in req thanks to middleware
+//   var data = req.gallery;
+//   // and we can res.render using one of the supplied templates (photo.ejs/album.ejs) or one of our own
+//   res.render(data.type + '.ejs', data);
+// });
 
 /*******************************************************************************
  *******************************************************************************
@@ -221,6 +231,15 @@ app.get('/guestbook', function (req, res) {
     res.render ('events/guestbook', { title: 'guestbook', user : req.user });
   } else {
     res.render ('events/guestbook', { title: 'guestbook', user : false });
+  }
+});
+
+// when a guest visits the FAQ page
+app.get('/faq', function (req, res) {
+  if ( req.user ){
+    res.render ('events/faq', { title: 'faq', user : req.user });
+  } else {
+    res.render ('events/faq', { title: 'faq', user : false });
   }
 });
 
