@@ -23,6 +23,7 @@ var express        = require('express'),
     session        = require('cookie-session'),
     methodOverride = require('method-override'),
     request        = require("request"),
+    tokens         = require('./config/tokens.json')
     app            = express();
 
 /*******************************************************************************
@@ -190,32 +191,47 @@ app.get('/logout', function (req, res) {
  *******************************************************************************
 *******************************************************************************/
 
-// when a guest visits event homepage
+// when a guest visits event homepage (eventbrite api and weather underground API)
 app.get('/event', function(req, res){
-  var url = "https://www.eventbriteapi.com/v3/events/14937457337/\?token\=UMLWCDAJ3ZMD67BD5VGZ";
+  var eventbriteURL = "https://www.eventbriteapi.com/v3/events/14937457337/\?token\="+tokens.eventbriteToken;
+  var weatherUnderground = "http://api.wunderground.com/api/"+tokens.weatherUndergroundToken+"/conditions/q/OR/Portland.json";
 
   if ( req.user ) {
-    request(url, function(error, response, body) {
+    request(eventbriteURL, function(error, response, body) {
       if(!error && response.statusCode == 200) {
-        var obj = JSON.parse(body);
+        var event = JSON.parse(body);
+      }
+      
+      request(weatherUnderground, function(error, response, body) {
+        if(!error && response.statusCode == 200) {
+          var weather = JSON.parse(body);
+        }
         res.render('events/index', {
                                     title: 'events', 
                                     user : req.user, 
-                                    event: obj
+                                    event: event,
+                                    weather: weather
                                    })
-      }
+      })
     });
   } else {
-    request(url, function(error, response, body) {
-      if(!error && response.statusCode == 200) {
-        var obj = JSON.parse(body);
-        res.render('events/index', {
-                                    title: 'events',
-                                    user : false,
-                                    event: obj
-                                   })
-      }
-    });
+    request(eventbriteURL, function(error, response, body) {
+          if(!error && response.statusCode == 200) {
+            var event = JSON.parse(body);
+          }
+          
+          request(weatherUnderground, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+              var weather = JSON.parse(body);
+            }
+            res.render('events/index', {
+                                        title: 'events', 
+                                        user : false, 
+                                        event: event,
+                                        weather: weather
+                                       })
+          })
+        });
   }
 });
 
