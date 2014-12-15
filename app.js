@@ -197,15 +197,17 @@ app.get('/event', function(req, res){
   var weatherUnderground = "http://api.wunderground.com/api/"+tokens.weatherUndergroundToken+"/conditions/q/OR/Portland.json";
 
   if ( req.user ) {
+    // first connect to Eventbrite to get current event details
     request(eventbriteURL, function(error, response, body) {
       if(!error && response.statusCode == 200) {
         var event = JSON.parse(body);
       }
-      
+      // then connect to Weather Underground for current weather in portland
       request(weatherUnderground, function(error, response, body) {
         if(!error && response.statusCode == 200) {
           var weather = JSON.parse(body);
         }
+        // pass both request objects into the render engine
         res.render('events/index', {
                                     title: 'events', 
                                     user : req.user, 
@@ -215,6 +217,7 @@ app.get('/event', function(req, res){
       })
     });
   } else {
+    // do the same thing for non-authenticated users
     request(eventbriteURL, function(error, response, body) {
           if(!error && response.statusCode == 200) {
             var event = JSON.parse(body);
@@ -232,6 +235,32 @@ app.get('/event', function(req, res){
                                        })
           })
         });
+  }
+});
+
+/*******************************************************************************
+ *******************************************************************************
+ **
+ ** GALLERY ROUTES
+ **
+ *******************************************************************************
+*******************************************************************************/
+var gallery = require('./controllers/gallery/gallery.js'),
+util = require('util');
+
+// setup a new static folder to store and serve images from
+app.use(express.static(__dirname + '/resources'));
+app.use(gallery.middleware({static: 'resources', directory: '/photos', rootURL: "/gallery"}));
+
+// configure a variable route that will accept album names
+app.get('/gallery*', function(req, res){
+  var data = req.gallery;
+  data.layout = false; // Express 2.5.* support, don't look for layout.ejs
+  
+  if ( req.user ) {
+    res.render ( data.type + '.ejs', data );
+  } else {
+    res.render ( data.type + '.ejs', data);
   }
 });
 
