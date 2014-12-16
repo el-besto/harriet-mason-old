@@ -16,7 +16,15 @@
 
   <div class="row">
     <div class="small-10 small-centered medium-10 medium-centered large-10 large-centered columns">
-      <p>Countdown Widget</p>
+      
+      <div class="clock"></div>
+
+      <script type="text/javascript">
+        var clock = $('.clock').FlipClock(3600 * 24 * 3, {
+          clockFace: 'DailyCounter',
+          countdown: true
+        });
+      </script>
     </div>
   </div>
 

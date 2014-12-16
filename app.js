@@ -28,33 +28,29 @@ var express        = require('express'),
 
 /*******************************************************************************
  *******************************************************************************
- **
- ** APP SETTINGS
- **
+ **               **
+ ** APP SETTINGS  **
+ **               **
  *******************************************************************************
 *******************************************************************************/
 // set default view engine to EJS
 app.set( 'view engine', 'ejs');
+
+// set static directory for styles, site img, and js
 app.use( express.static(__dirname + '/public'));
+
+// use bodyParser to be able to grab params from body
 app.use( bodyParser.urlencoded( { extended:true } ));
+
+// use methodOverride to allow Patch and Destroy routes
 app.use( methodOverride('_method'));
 
-// // setup node-gallery
-// app.use(gallery.middleware({static: 'resources', directory: '/photos', rootURL: "/gallery"}));
-
-// // now, our middleware does gallery lookups for every URL under rootURL - e.g. /gallery
-// app.get('/gallery*', function(req, res){
-//   // We automatically have the gallery data available to us in req thanks to middleware
-//   var data = req.gallery;
-//   // and we can res.render using one of the supplied templates (photo.ejs/album.ejs) or one of our own
-//   res.render(data.type + '.ejs', data);
-// });
 
 /*******************************************************************************
  *******************************************************************************
- **
- ** Passport Setup
- **
+ **                 **
+ ** Passport Setup  **
+ **                 **
  *******************************************************************************
 *******************************************************************************/
 app.use(session({
@@ -90,9 +86,9 @@ passport.deserializeUser( function (id, done) {
 
 /*******************************************************************************
  *******************************************************************************
- **
- ** USERS ROUTES
- **
+ **               **
+ ** USERS ROUTES  **
+ **               **
  *******************************************************************************
 *******************************************************************************/
 
@@ -185,9 +181,9 @@ app.get('/logout', function (req, res) {
 
 /*******************************************************************************
  *******************************************************************************
- **
- ** EVENTBRITE
- **
+ **             **
+ ** EVENTBRITE  **
+ **             **
  *******************************************************************************
 *******************************************************************************/
 
@@ -240,17 +236,28 @@ app.get('/event', function(req, res){
 
 /*******************************************************************************
  *******************************************************************************
- **
- ** GALLERY ROUTES
- **
+ **                 **
+ ** GALLERY ROUTES  **
+ **                 **
  *******************************************************************************
 *******************************************************************************/
+
+// require gallery.js from node-gallery module
 var gallery = require('./controllers/gallery/gallery.js'),
+
+// require file system utilities for grabbing items from a directory
 util = require('util');
 
 // setup a new static folder to store and serve images from
 app.use(express.static(__dirname + '/resources'));
-app.use(gallery.middleware({static: 'resources', directory: '/photos', rootURL: "/gallery"}));
+
+// config middleware to operate on 'resources/photos' && set route to '/gallery'
+app.use(gallery.middleware({ 
+                             static: 'resources', 
+                             directory: '/photos', 
+                             rootURL: "/gallery"
+                           })
+        );
 
 // configure a variable route that will accept album names
 app.get('/gallery*', function(req, res){
@@ -266,9 +273,41 @@ app.get('/gallery*', function(req, res){
 
 /*******************************************************************************
  *******************************************************************************
- **
- ** STATIC SITE ROUTES
- **
+ **                     **
+ ** GUEST BOOK ROUTES   **
+ **                     **
+ *******************************************************************************
+*******************************************************************************/
+
+// when a user wants to create a new guestbook entry, render the new post form
+app.get('/guestbook/new', function (req, res) {
+  res.render('guestbook/new');
+});
+
+// when a user submits the new post form 
+app.post('/guestbook', function (req, res) {
+  db.user
+    .find(req.body.req.user)
+    .then()
+});
+
+// when a user wants to see all guestbook posts
+app.get('/guestbook', function (req, res) {
+  db.post
+    .findAll()
+    .then(function (foundPosts) {
+      res.render('guestbook/index', { postList : foundPosts } );
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+/*******************************************************************************
+ *******************************************************************************
+ **                     **
+ ** STATIC SITE ROUTES  **
+ **                     **
  *******************************************************************************
 *******************************************************************************/
 
@@ -320,9 +359,9 @@ app.get('/faq', function (req, res) {
 
 /*******************************************************************************
  *******************************************************************************
- **
- ** START SERVER
- **
+ **               **
+ ** START SERVER  **
+ **               **
  *******************************************************************************
 *******************************************************************************/
 db.sequelize.sync().then( function () {
