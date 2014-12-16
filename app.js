@@ -81,13 +81,11 @@ passport.deserializeUser( function (id, done) {
     );
 });
 
-/*******************************************************************************
- *******************************************************************************
- **               **
- ** USERS ROUTES  **
- **               **
- *******************************************************************************
-*******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+ /*               *
+ ** Users Routes  **
+ *                */
+////////////////////////////////////////////////////////////////////////////////
 
 // when a guest wants to sign up
 app.get('/signup', function (req, res) {
@@ -216,17 +214,11 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-/*******************************************************************************
- *******************************************************************************
- **                    **
+////////////////////////////////////////////////////////////////////////////////
+ /*                    *
  ** USER DEMOGRAPHICS  **
- **                    **
- *******************************************************************************
-*******************************************************************************/
-// db.userDemog.find ({where: { userId: 2} }).then (function (foundDemographic){foundDemographic.updateAttributes({firstName: "angelo"}).success( function (foundDemographic){console.log(foundDemographic.firstName);})});
-//     .catch( function (err) {
-//       console.log(err);
-//     });
+ *                     */
+////////////////////////////////////////////////////////////////////////////////
 app.post('/userdemog/:id', function (req, res) {
   var userId = req.params.id;
   db.userDemog
@@ -253,13 +245,11 @@ app.post('/userdemog/:id', function (req, res) {
     });
 });
 
-/*******************************************************************************
- *******************************************************************************
- **             **
- ** EVENTBRITE  **
- **             **
- *******************************************************************************
-*******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+ /*                *
+ ** EVENTBRITE    **
+ *                */
+////////////////////////////////////////////////////////////////////////////////
 
 // when a guest visits event homepage (eventbrite api and weather underground API)
 app.get('/event', function(req, res){
@@ -312,50 +302,11 @@ app.get('/event', function(req, res){
   }
 });
 
-/*******************************************************************************
- *******************************************************************************
- **                 **
- ** GALLERY ROUTES  **
- **                 **
- *******************************************************************************
-*******************************************************************************/
-
-// require gallery.js from node-gallery module
-var gallery = require('./controllers/gallery/gallery.js'),
-
-// require file system utilities for grabbing items from a directory
-util = require('util');
-
-// setup a new static folder to store and serve images from
-app.use(express.static(__dirname + '/resources'));
-
-// config middleware to operate on 'resources/photos' && set route to '/gallery'
-app.use(gallery.middleware({ 
-                             static: 'resources', 
-                             directory: '/photos', 
-                             rootURL: "/gallery"
-                           })
-        );
-
-// configure a variable route that will accept album names
-app.get('/gallery*', function(req, res){
-  var data = req.gallery;
-  data.layout = false; // Express 2.5.* support, don't look for layout.ejs
-  
-  if ( req.user ) {
-    res.render ( data.type + '.ejs', data );
-  } else {
-    res.render ( data.type + '.ejs', data);
-  }
-});
-
-/*******************************************************************************
- *******************************************************************************
- **                     **
- ** GUEST BOOK ROUTES   **
- **                     **
- *******************************************************************************
-*******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+ /*                   *
+ ** GUESTBOOK ROUTES  **
+ *                    */
+////////////////////////////////////////////////////////////////////////////////
 
 // when a user wants to create a new guestbook entry, render the new post form
 app.get('/guestbook/:user_id/new', function (req, res) {
@@ -429,13 +380,11 @@ app.get('/guestbook', function (req, res) {
     });
 });
 
-/*******************************************************************************
- *******************************************************************************
- **                     **
- ** STATIC SITE ROUTES  **
- **                     **
- *******************************************************************************
-*******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+ /*               *
+ ** STATIC ROUTES **
+ *                */
+////////////////////////////////////////////////////////////////////////////////
 
 // when a guest visits about page
 app.get('/about', function (req, res) {
@@ -479,6 +428,42 @@ app.get('/faq', function (req, res) {
     res.render ('events/faq', { title: 'faq', user : req.user });
   } else {
     res.render ('events/faq', { title: 'faq', user : false });
+  }
+});
+
+
+////////////////////////////////////////////////////////////////////////////////
+ /*                  *
+ ** GALLERY ROUTES  **
+ *                  */
+////////////////////////////////////////////////////////////////////////////////
+
+// require gallery.js from node-gallery module
+var gallery = require('./controllers/gallery/gallery.js'),
+
+// require file system utilities for grabbing items from a directory
+util = require('util');
+
+// setup a new static folder to store and serve images from
+app.use(express.static(__dirname + '/resources'));
+
+// config middleware to operate on 'resources/photos' && set route to '/gallery'
+app.use(gallery.middleware({ 
+                             static: 'resources', 
+                             directory: '/photos', 
+                             rootURL: "/gallery"
+                           })
+        );
+
+// configure a variable route that will accept album names
+app.get('/gallery*', function(req, res){
+  var data = req.gallery;
+  data.layout = false; // Express 2.5.* support, don't look for layout.ejs
+  
+  if ( req.user ) {
+    res.render ( data.type + '.ejs', data );
+  } else {
+    res.render ( data.type + '.ejs', data);
   }
 });
 
