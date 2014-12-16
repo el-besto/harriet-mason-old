@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
         this.belongsTo (models.user);
-        this.hasOne(models.userDemographics, {foreignKey : "userId", through: null})
+        this.hasOne(models.userDemog, {foreignKey : "userId", through: null});
       }
     }
   });

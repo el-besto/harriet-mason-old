@@ -27,13 +27,11 @@ var express        = require('express'),
     tokens         = require('./config/tokens.json')
     app            = express();
 
-/*******************************************************************************
- *******************************************************************************
- **               **
+////////////////////////////////////////////////////////////////////////////////
+ /*               *
  ** APP SETTINGS  **
- **               **
- *******************************************************************************
-*******************************************************************************/
+ *                */
+////////////////////////////////////////////////////////////////////////////////
 // set default view engine to EJS
 app.set( 'view engine', 'ejs');
 
@@ -47,13 +45,11 @@ app.use( bodyParser.urlencoded( { extended:true } ));
 app.use( methodOverride('_method'));
 
 
-/*******************************************************************************
- *******************************************************************************
- **                 **
- ** Passport Setup  **
- **                 **
- *******************************************************************************
-*******************************************************************************/
+/******************************************************************************/
+ //                 //
+ // Passport Setup  //
+ //                 //
+/******************************************************************************/
 app.use(session({
                  secret: 'thisismysecretkey',
                  name:   'chocolate chip',
@@ -131,7 +127,7 @@ app.post('/users', function (req, res) {
                         },
                         //success
                         function (err, user) {
-                             db.userDemographics
+                             db.userDemog
                                .create({userId: user.id})
                                .then( function(){
                                         req.login    (user, function(){
@@ -182,7 +178,7 @@ app.get('/users/:id', function (req, res) {
   db.user
     .find({
            where: { id : req.params.id },
-           include: [db.userDemographics]
+           include: [db.userDemog]
     })
     .then( function (user) {
          console.log(user.values);
@@ -228,7 +224,7 @@ app.get('/logout', function (req, res) {
  *******************************************************************************
 *******************************************************************************/
 app.post('/userdemographics/:id', function (req, res) {
-  db.userDemographics
+  db.userDemog
     .find ({
             where   : { userId: req.params.id }
     })
@@ -247,7 +243,7 @@ app.post('/userdemographics/:id', function (req, res) {
             .success
             ( function (foundDemographic) {
                 console.log("demographics updated");
-                res.redirect('/users/'+ foundDemographic.userId);
+                res.redirect('/users/'+ req.params.id);
               })
     })
     .catch( function (err) {
@@ -390,9 +386,11 @@ app.get('/guestbook/:user_id/posts/:id', function (req, res) {
   db.post
     .find({
            where: { id : id},
-           include : [db.user]
+           include : [db.user, db.userDemog]
     })
     .then(function (foundPost) {
+      console.log(foundPost);
+      console.log(foundPost.values);
       res.render('guestbook/show', { post : foundPost });
     })
     .catch(function (err) {
@@ -419,9 +417,9 @@ app.delete('/guestbook/:user_id/post/:id', function (req, res) {
 // when a user wants to see all guestbook posts
 app.get('/guestbook', function (req, res) {
   db.post
-    .findAll({include: [db.user, db.userDemographics] })
+    .findAll({include: [db.user, db.userDemog] })
     .then(function (foundPosts) {
-      console.log(foundPosts);
+      console.log(foundPosts.values);
       res.render('guestbook/index', { postList : foundPosts } );
     })
     .catch(function (err) {

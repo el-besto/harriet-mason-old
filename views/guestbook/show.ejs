@@ -6,9 +6,13 @@
 <body>
   <h1>Show Post</h1>
   <p>
+    <%= post.userDemog.firstName %>
+    <%= post.userDemog.lastName %> <br>
+    <%= post.createdAt %> <br>
     <%= post.title %> <br>
     <%= post.content %> <br>
     <%= post.user.email %>
+
   </p>
   <p>
     <form method="post" action="/guestbook/<%= post.user.id %>/post/<%= post.id %>?_method=DELETE" ><button>delete</button></form>

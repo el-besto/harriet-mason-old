@@ -16,6 +16,7 @@
     <% if (user) { %>
       <li><a href="/users/<%= user.id %>">Logged in as <%= user.email %></a></li>
       <li><a href="/logout">Logout</a></li>
+      <li><a href="/guestbook/<%= user.id %>/new">new guestbook entry</a></li>
     <% } else { %>
       <li><a href="/login">Log In </a></li>
       <li><a href="/signup">Sign Up</a></li>
