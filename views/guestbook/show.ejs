@@ -1,0 +1,17 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Show Post</h1>
+  <p>
+    <%= post.title %> <br>
+    <%= post.content %> <br>
+    <%= post.user.email %>
+  </p>
+  <p>
+    <form method="post" action="/guestbook/<%= post.user.id %>/post/<%= post.id %>?_method=DELETE" ><button>delete</button></form>
+  </p>
+</body>
+</html>

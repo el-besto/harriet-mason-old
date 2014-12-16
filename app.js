@@ -17,6 +17,7 @@
 *******************************************************************************/
 
 var express        = require('express'),
+    PORT           = 3000,
     bodyParser     = require('body-parser'),
     db             = require('./models'),
     passport       = require('passport'),
@@ -113,7 +114,14 @@ app.post('/users', function (req, res) {
     //                   success      //
     //                 );             //
     //                                */
-  db.user.createSecure( //email
+  db.user
+    .find({ 
+           where: { email : newUser.email }
+         })
+    .then(function (foundUser){
+      if (!foundUser){
+        db.user
+          .createSecure(//email
                         newUser.email,
                         //password
                         newUser.password, 
@@ -123,11 +131,40 @@ app.post('/users', function (req, res) {
                         },
                         //success
                         function (err, user) {
-                             req.login    (user, function(){
-                             console.log  ("Id: ", user.id)
-                             res.redirect ('/users/' + user.id);
+                             db.userDemographics
+                               .create({userId: user.id})
+                               .then( function(){
+                                        req.login    (user, function(){
+                                        res.redirect ('/users/' + user.id + '/new');
+                                                            } 
+                                                      )
+                                                }
+                                    );
                         }
-                      );
+                       )
+      } else {
+        res.render('error', { 
+                             message: "Someone with that email already exists",
+                             });
+
+      }
+    }).catch (function (err) {
+      console.log(err);
+    });
+  
+});
+
+// after first login, show update demographics form
+app.get('/users/:id/new', function (req, res) {
+  db.user
+    .find( req.params.id )
+    .then( function (user) {
+         res.render
+         ('users/new', { user : user});
+    })
+    .error( function () {
+          res.redirect
+          ('/signup');
     })
 });
 
@@ -143,10 +180,14 @@ app.get('/login', function (req, res) {
 // after existingUser signs in; routes to their profile. if(err) redirect-> signup
 app.get('/users/:id', function (req, res) {
   db.user
-    .find( req.params.id )
+    .find({
+           where: { id : req.params.id },
+           include: [db.userDemographics]
+    })
     .then( function (user) {
+         console.log(user.values);
          res.render
-         ('users/show', { user : user});
+         ('users/profile', { user : user});
     })
     .error( function () {
           res.redirect
@@ -181,6 +222,41 @@ app.get('/logout', function (req, res) {
 
 /*******************************************************************************
  *******************************************************************************
+ **                    **
+ ** USER DEMOGRAPHICS  **
+ **                    **
+ *******************************************************************************
+*******************************************************************************/
+app.post('/userdemographics/:id', function (req, res) {
+  db.userDemographics
+    .find ({
+            where   : { userId: req.params.id }
+    })
+    .then (function (foundDemographic) {
+            foundDemographic
+            .updateAttributes
+            ({
+              firstName : req.body.userDemographics.firstName,
+              lastName : req.body.userDemographics.lastName,
+              address1 : req.body.userDemographics.address1,
+              address2 : req.body.userDemographics.address2,
+              city: req.body.userDemographics.city,
+              state: req.body.userDemographics.state,
+              zip: req.body.userDemographics.zip
+            })
+            .success
+            ( function (foundDemographic) {
+                console.log("demographics updated");
+                res.redirect('/users/'+ foundDemographic.userId);
+              })
+    })
+    .catch( function (err) {
+      console.log(err);
+    });
+});
+
+/*******************************************************************************
+ *******************************************************************************
  **             **
  ** EVENTBRITE  **
  **             **
@@ -189,8 +265,12 @@ app.get('/logout', function (req, res) {
 
 // when a guest visits event homepage (eventbrite api and weather underground API)
 app.get('/event', function(req, res){
-  var eventbriteURL = "https://www.eventbriteapi.com/v3/events/14937457337/\?token\="+tokens.eventbriteToken;
-  var weatherUnderground = "http://api.wunderground.com/api/"+tokens.weatherUndergroundToken+"/conditions/q/OR/Portland.json";
+  var eventbriteURL      = "https://www.eventbriteapi.com/"
+                            + "v3/events/14937457337/\?token\="
+                            + tokens.eventbriteToken;
+  var weatherUnderground = "http://api.wunderground.com/api/" 
+                            + tokens.weatherUndergroundToken
+                            + "/conditions/q/OR/Portland.json";
 
   if ( req.user ) {
     // first connect to Eventbrite to get current event details
@@ -205,10 +285,10 @@ app.get('/event', function(req, res){
         }
         // pass both request objects into the render engine
         res.render('events/index', {
-                                    title: 'events', 
-                                    user : req.user, 
-                                    event: event,
-                                    weather: weather
+                                    title   : 'events', 
+                                    user    : req.user, 
+                                    event   : event,
+                                    weather : weather
                                    })
       })
     });
@@ -280,15 +360,60 @@ app.get('/gallery*', function(req, res){
 *******************************************************************************/
 
 // when a user wants to create a new guestbook entry, render the new post form
-app.get('/guestbook/new', function (req, res) {
-  res.render('guestbook/new');
+app.get('/guestbook/:user_id/new', function (req, res) {
+  var userId = req.params.user_id;
+  res.render('guestbook/new', { userId : userId });
 });
 
 // when a user submits the new post form 
-app.post('/guestbook', function (req, res) {
-  db.user
-    .find(req.body.req.user)
-    .then()
+app.post('/guestbook/:user_id/new', function (req, res) {
+  var userId = req.params.user_id;
+  db.post
+    .create({
+             title   : req.body.post.title,
+             content : req.body.post.content,
+             img_url : req.body.post.img_url,
+             userId  : userId
+    })
+    .then( function (post) {
+      res.redirect('/guestbook/' + userId + '/posts/' + post.id);
+    })
+    .catch( function (err) {
+      console.log(err);
+    });
+});
+
+// when a user wants to see a particular post
+app.get('/guestbook/:user_id/posts/:id', function (req, res) {
+  var userId = req.params.user_id;
+  var id = req.params.id;
+  db.post
+    .find({
+           where: { id : id},
+           include : [db.user]
+    })
+    .then(function (foundPost) {
+      res.render('guestbook/show', { post : foundPost });
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+// when a user wants to delete a particular guestbook entry
+app.delete('/guestbook/:user_id/post/:id', function (req, res) {
+  db.post
+    .find( req.params.id )
+    .then( function (foundPost) {
+      foundPost.destroy()
+               .then( function () {
+                  console.log('Post deleted');
+                  res.render('guestbook/deleted');
+               })
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 });
 
 // when a user wants to see all guestbook posts
@@ -365,9 +490,9 @@ app.get('/faq', function (req, res) {
  *******************************************************************************
 *******************************************************************************/
 db.sequelize.sync().then( function () {
-  var server = app.listen (3000, function () {
+  var server = app.listen (PORT, function () {
     console.log ( new Array (50).join("*") );
-    console.log ( "\t listening \n\t\t localhost:3000" );
+    console.log ( "\t listening \n\t\t localhost: " + PORT );
     console.log ( new Array (50).join("*") );
   });
 });
