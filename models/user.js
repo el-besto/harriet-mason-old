@@ -28,8 +28,6 @@ module.exports = function(sequelize, DataTypes) {
         this.hasOne(models.userDemog);
         this.hasMany(models.userAddress);
         this.hasMany(models.post);
-        this.hasOne (models.userDemographics);
-        
       },
       findByEmail: function (email) {
         return this.find({

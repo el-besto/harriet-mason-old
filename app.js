@@ -223,28 +223,30 @@ app.get('/logout', function (req, res) {
  **                    **
  *******************************************************************************
 *******************************************************************************/
-app.post('/userdemographics/:id', function (req, res) {
+// db.userDemog.find ({where: { userId: 2} }).then (function (foundDemographic){foundDemographic.updateAttributes({firstName: "angelo"}).success( function (foundDemographic){console.log(foundDemographic.firstName);})});
+//     .catch( function (err) {
+//       console.log(err);
+//     });
+app.post('/userdemog/:id', function (req, res) {
+  var userId = req.params.id;
   db.userDemog
     .find ({
-            where   : { userId: req.params.id }
+            where   : { userId: userId }
     })
     .then (function (foundDemographic) {
             foundDemographic
             .updateAttributes
             ({
-              firstName : req.body.userDemographics.firstName,
-              lastName  : req.body.userDemographics.lastName,
-              address1  : req.body.userDemographics.address1,
-              address2  : req.body.userDemographics.address2,
-              city      : req.body.userDemographics.city,
-              state     : req.body.userDemographics.state,
-              zip       : req.body.userDemographics.zip
+              firstName         : req.body.userDemog.firstName,
+              lastName          : req.body.userDemog.lastName,
+              suffix            : req.body.userDemog.suffix
+              
             })
             .success
             ( function (foundDemographic) {
                 console.log("demographics updated");
-                res.redirect('/users/'+ req.params.id);
-              })
+                res.redirect('/users/'+ foundDemographic.userId);
+              });
     })
     .catch( function (err) {
       console.log(err);
@@ -495,3 +497,4 @@ db.sequelize.sync().then( function () {
     console.log ( new Array (50).join("*") );
   });
 });
+

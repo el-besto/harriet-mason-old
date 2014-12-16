@@ -1,35 +1,21 @@
-<form method="POST" action="/userdemographics/<%= user.id %>">
+<form method="POST" action="/userdemog/<%=user.id %>">
   <fieldset>
     
     <legend>User Details</legend>
     
-    <label>
-      <input type="text" name="userDemographics[firstName]" placeholder="first name" value="<%= user.userDemog.firstName %>">
+    <label>firstname
+      <input type="text" name="userDemog[firstName]" placeholder="first name" value="<%= user.userDemog.firstName %>">
     </label>
     
-    <label>
-      <input type="text" name="userDemographics[lastName]" placeholder="last name, including any suffixes" value="<%= user.userDemog.lastName %>">
+    <label>lastname
+      <input type="text" name="userDemog[lastName]" placeholder="last name" value="<%= user.userDemog.lastName %>">
     </label>
 
-    <label>
-      <input type="text" name="userDemographics[address1]" placeholder="address line 1" value="<%= user.userDemog.address1 %>">
+    <label>suffix
+      <input type="text" name="userDemog[suffix]" placeholder="suffix, e.g. Jr, III, MD, JD" value="<%= user.userDemog.suffix %>">
     </label>
 
-    <label>
-      <input type="text" name="userDemographics[address2]" placeholder="address line 2" value="<%= user.userDemog.address2 %>">
-    </label>
-
-    <label>
-      <input type="text" name="userDemographics[city]" placeholder="city" value="<%= user.userDemog.city %>">
-    </label>
-
-    <label>
-      <input type="text" name="userDemographics[state]" placeholder="state e.g. CA" value="<%= user.userDemog.state %>">
-    </label>
-
-    <label>
-      <input type="text" name="userDemographics[zip]" placeholder="zip code, restrict to five-digit zip" value="<%= user.userDemog.zip %>">
-    </label>
+    
 
     <button class="expand">save</button>
   

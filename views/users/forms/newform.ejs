@@ -1,40 +1,33 @@
-<form method="POST" action="/userdemographics/<%= user.id %>">
+<form method="POST" action="/userdemog/<%=user.id %>">
   <fieldset>
     
     <legend>User Details</legend>
     
     <label>
-      <input type="text" name="userDemographics[firstName]" placeholder="first name">
+      <input type="text" name="userDemog[firstName]" placeholder="first name">
+    </label>
+    
+    <label>
+      <input type="text" name="userDemog[lastName]" placeholder="last name" >
     </label>
 
     <label>
-      <input type="text" name="userDemographics[lastName]" placeholder="last name, including any suffixes">
+      <input type="text" name="userDemog[suffix]" placeholder="suffix, e.g. Jr, III, MD, JD">
+    </label>
+
+    <!-- <label>
+      <input type="text" name="userDemog[age]" placeholder="age in years"  >
     </label>
 
     <label>
-      <input type="text" name="userDemographics[address1]" placeholder="address line 1">
+      <input type="text" name="userDemog[birthday]" placeholder="MM/DD/YYYY">
     </label>
 
     <label>
-      <input type="text" name="userDemographics[address2]" placeholder="address line 2">
-    </label>
-
-    <label>
-      <input type="text" name="userDemographics[city]" placeholder="city">
-    </label>
-
-    <label>
-      <input type="text" name="userDemographics[state]" placeholder="state e.g. CA">
-    </label>
-
-    <label>
-      <input type="text" name="userDemographics[zip]" placeholder="zip code, restrict to five-digit zip">
-    </label>
+      <input type="text" name="userDemog[genderPreference]" placeholder="gender preference">
+    </label> -->
 
     <button class="expand">save</button>
   
   </fieldset>
 </form>
-  
-  
-  
