@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  
+// scripts for slick carousel
   $('.variable-width').slick({
     dots: true,
     infinite: true,
@@ -9,7 +11,6 @@ $(document).ready(function(){
   });
   
   $('.single-item').slick();
-
 
   $('.responsive').slick({
     dots: true,
@@ -42,6 +43,15 @@ $(document).ready(function(){
         }
       }
     ]
+  });
+
+  // script for flipclock
+  var today = new Date(),
+      now = Date().now,
+      birthday = new Date(2015, 3, 18);
+  var clock = $('.clock').FlipClock(((birthday - today)/3600), {
+    clockFace: 'DailyCounter',
+    countdown: true
   });
   
 });
