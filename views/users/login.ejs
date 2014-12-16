@@ -3,23 +3,7 @@
   <div class="row">
     <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
       
-      <form method="POST" action="/login">
-        <fieldset>
-          
-          <legend>Login</legend>
-          
-          <label>
-            <input type="text" name="user[email]" placeholder="Username: valid email address">
-          </label>
-          
-          <label>
-            <input type="text" name="user[password]" placeholder="Password: must be at least 8 characters">
-          </label>
-
-          <button class="expand">login</button>
-        
-        </fieldset>
-      </form>
+    <% include ./forms/loginform %>
     
     </div>
   </div>

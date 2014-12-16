@@ -237,12 +237,12 @@ app.post('/userdemographics/:id', function (req, res) {
             .updateAttributes
             ({
               firstName : req.body.userDemographics.firstName,
-              lastName : req.body.userDemographics.lastName,
-              address1 : req.body.userDemographics.address1,
-              address2 : req.body.userDemographics.address2,
-              city: req.body.userDemographics.city,
-              state: req.body.userDemographics.state,
-              zip: req.body.userDemographics.zip
+              lastName  : req.body.userDemographics.lastName,
+              address1  : req.body.userDemographics.address1,
+              address2  : req.body.userDemographics.address2,
+              city      : req.body.userDemographics.city,
+              state     : req.body.userDemographics.state,
+              zip       : req.body.userDemographics.zip
             })
             .success
             ( function (foundDemographic) {
@@ -419,8 +419,9 @@ app.delete('/guestbook/:user_id/post/:id', function (req, res) {
 // when a user wants to see all guestbook posts
 app.get('/guestbook', function (req, res) {
   db.post
-    .findAll()
+    .findAll({include: [db.user, db.userDemographics] })
     .then(function (foundPosts) {
+      console.log(foundPosts);
       res.render('guestbook/index', { postList : foundPosts } );
     })
     .catch(function (err) {

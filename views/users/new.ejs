@@ -4,16 +4,7 @@
   <div>
     Your Username is: <%= user.email %>
     <div>
-      <form action="/userdemographics/<%= user.id %>" method="POST">
-        <input type="text" name="userDemographics[firstName]" placeholder="first name">
-        <input type="text" name="userDemographics[lastName]" placeholder="last name, including any suffixes">
-        <input type="text" name="userDemographics[address1]" placeholder="address line 1">
-        <input type="text" name="userDemographics[address2]" placeholder="address line 2">
-        <input type="text" name="userDemographics[city]" placeholder="city">
-        <input type="text" name="userDemographics[state]" placeholder="state e.g. CA">
-        <input type="text" name="userDemographics[zip]" placeholder="zip code, restrict to five-digit zip">
-        <button>Save</button>
-      </form>
+      <% include ./forms/newform %>
     </div>
   </div>
 <% include ../footer %>

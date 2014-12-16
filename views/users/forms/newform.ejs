@@ -1,0 +1,40 @@
+<form method="POST" action="/userdemographics/<%= user.id %>">
+  <fieldset>
+    
+    <legend>User Details</legend>
+    
+    <label>
+      <input type="text" name="userDemographics[firstName]" placeholder="first name">
+    </label>
+
+    <label>
+      <input type="text" name="userDemographics[lastName]" placeholder="last name, including any suffixes">
+    </label>
+
+    <label>
+      <input type="text" name="userDemographics[address1]" placeholder="address line 1">
+    </label>
+
+    <label>
+      <input type="text" name="userDemographics[address2]" placeholder="address line 2">
+    </label>
+
+    <label>
+      <input type="text" name="userDemographics[city]" placeholder="city">
+    </label>
+
+    <label>
+      <input type="text" name="userDemographics[state]" placeholder="state e.g. CA">
+    </label>
+
+    <label>
+      <input type="text" name="userDemographics[zip]" placeholder="zip code, restrict to five-digit zip">
+    </label>
+
+    <button class="expand">save</button>
+  
+  </fieldset>
+</form>
+  
+  
+  
