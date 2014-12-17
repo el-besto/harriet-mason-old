@@ -1,11 +1,14 @@
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
-<body>
+<!--views/guestbook/new.ejs-->
+<% include ../header %>
 
-  <% include ./forms/newguestbookform %>
-  
-</body>
-</html>
+  <div class="row">
+    <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
+
+    <h1>New Guestbook Entry</h1>
+      
+    <% include ./forms/newguestbookform %>
+    
+    </div>
+  </div>
+
+<% include ../footer %>

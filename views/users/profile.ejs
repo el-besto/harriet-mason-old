@@ -1,10 +1,18 @@
 <!--views/users/profile.ejs-->
-<% include ../header2 %>
-<h1>users/profile</h1>
-  <div>
-    Your Username is: <%= user.email %>
-    <div>
-      <% include ./forms/profileform %>
+<% include ../header %>
+
+  <div class="row">
+    <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
+
+    <h1>users/profile</h1>
+      <div>
+        Your Username is: <%= user.email %>
+        <div>
+          <% include ./forms/profileform %>
+        </div>
+      </div>
+          
     </div>
   </div>
+
 <% include ../footer %>

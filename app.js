@@ -311,7 +311,18 @@ app.get('/event', function(req, res){
 // when a user wants to create a new guestbook entry, render the new post form
 app.get('/guestbook/:user_id/new', function (req, res) {
   var userId = req.params.user_id;
-  res.render('guestbook/new', { userId : userId });
+  db.user
+    .find({
+           where : { id : userId },
+           include: [db.userDemog]
+    })
+    .then(function (user) {
+      res.render('guestbook/new', { user: user });
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+
 });
 
 // when a user submits the new post form 
@@ -332,6 +343,23 @@ app.post('/guestbook/:user_id/new', function (req, res) {
     });
 });
 
+// TESTING TO SEE IF I CAN BREAK APART OBJECT AND RETURN DESCRETELY
+app.get('/guestbook/posts/:id', function (req, res) {
+  var id = req.params.id;
+  db.post
+    .find({
+           where: { id : id},
+           include : [db.user, db.userDemog]
+    })
+    .then(function (post) {
+      console.log(post);
+      res.render('guestbook/show', { post : post, user: req.user });
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
 // when a user wants to see a particular post
 app.get('/guestbook/:user_id/posts/:id', function (req, res) {
   var userId = req.params.user_id;
@@ -344,7 +372,7 @@ app.get('/guestbook/:user_id/posts/:id', function (req, res) {
     .then(function (foundPost) {
       console.log(foundPost);
       console.log(foundPost.values);
-      res.render('guestbook/show', { post : foundPost });
+      res.render('guestbook/show', { post : foundPost, user: req.user });
     })
     .catch(function (err) {
       console.log(err);
@@ -354,12 +382,12 @@ app.get('/guestbook/:user_id/posts/:id', function (req, res) {
 // when a user wants to delete a particular guestbook entry
 app.delete('/guestbook/:user_id/post/:id', function (req, res) {
   db.post
-    .find( req.params.id )
+    .find( {where: {id : req.params.id} })
     .then( function (foundPost) {
       foundPost.destroy()
                .then( function () {
                   console.log('Post deleted');
-                  res.render('guestbook/deleted');
+                  res.render('guestbook/deleted', { user: req.user});
                })
     })
     .catch(function (err) {
@@ -369,15 +397,21 @@ app.delete('/guestbook/:user_id/post/:id', function (req, res) {
 
 // when a user wants to see all guestbook posts
 app.get('/guestbook', function (req, res) {
-  db.post
-    .findAll({include: [db.user, db.userDemog] })
-    .then(function (foundPosts) {
-      console.log(foundPosts.values);
-      res.render('guestbook/index', { postList : foundPosts } );
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+  if ( req.user ) {
+    db.post
+      .findAll({ include: [db.user, db.userDemog] })
+      .then(function (foundPosts) {
+        res.render('guestbook/index', { postList : foundPosts, user : req.user, title: 'guestbook' });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  } else {
+    res.render ('site/about', { title: 'about', user : false    });
+  }
+
+
+  
 });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -482,4 +516,3 @@ db.sequelize.sync().then( function () {
     console.log ( new Array (50).join("*") );
   });
 });
-

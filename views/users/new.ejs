@@ -1,10 +1,18 @@
 <!--views/users/profile.ejs-->
 <% include ../header %>
-<h1>update demographics after first login</h1>
-  <div>
-    Your Username is: <%= user.email %>
-    <div>
-      <% include ./forms/newform %>
+
+  <div class="row">
+    <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
+
+    <h1>update demographics after first login</h1>
+      <div>
+        Your Username is: <%= user.email %>
+        <div>
+          <% include ./forms/newform %>
+        </div>
+      </div>
+          
     </div>
   </div>
+
 <% include ../footer %>
