@@ -483,9 +483,9 @@ app.use(express.static(__dirname + '/resources'));
 
 // config middleware to operate on 'resources/photos' && set route to '/gallery'
 app.use(gallery.middleware({ 
-                             static: 'resources', 
+                             static:    'resources', 
                              directory: '/photos', 
-                             rootURL: "/gallery"
+                             rootURL:   "/gallery"
                            })
         );
 
