@@ -1,18 +1,27 @@
 <!--views/users/profile.ejs-->
 <% include ../header %>
 
-  <div class="row">
-    <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
+<div class="row">
+  
+  <p>
+    <h3>Your Username is: </h3><%= user.email %>
+  </p>
 
-    <h1>update demographics after first login</h1>
-      <div>
-        Your Username is: <%= user.email %>
-        <div>
-          <% include ./forms/newform %>
-        </div>
-      </div>
-          
+  <dl class="tabs" data-tab>
+    <dd class="active"><a href="#newform">Contact Info</a></dd>
+    <dd><a href="#addressform">Signup</a></dd>
+  </dl>
+  <div class="tabs-content vertical">
+    <div class="content active" id="newform">
+      <p><% include ./forms/newform %></p>
+    </div>
+    <div class="content" id="addressform">
+      <p><% include ./forms/addressform %></p>
     </div>
   </div>
 
+</div>
+
+
 <% include ../footer %>
+

@@ -3,16 +3,20 @@
     
     <legend>User Details</legend>
     
+    <label>username/primary email
+      <input type="text" name="" placeholder="" value="<%= user.email %>" disabled>
+    </label>
+
     <label>firstname
-      <input type="text" name="userDemog[firstName]" placeholder="first name" value="<%= user.userDemog.firstName %>">
+      <input type="text" name="userDemog[firstName]" placeholder="first name" value="<%= user.userDemog.firstName %>" disabled>
     </label>
     
     <label>lastname
-      <input type="text" name="userDemog[lastName]" placeholder="last name" value="<%= user.userDemog.lastName %>">
+      <input type="text" name="userDemog[lastName]" placeholder="last name" value="<%= user.userDemog.lastName %>" disabled>
     </label>
 
     <label>suffix
-      <input type="text" name="userDemog[suffix]" placeholder="suffix, e.g. Jr, III, MD, JD" value="<%= user.userDemog.suffix %>">
+      <input type="text" name="userDemog[suffix]" placeholder="suffix, e.g. Jr, III, MD, JD" value="<%= user.userDemog.suffix %>" disabled>
     </label>
 
     

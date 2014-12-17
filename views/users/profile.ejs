@@ -4,15 +4,29 @@
   <div class="row">
     <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
 
-    <h1>users/profile</h1>
-      <div>
-        Your Username is: <%= user.email %>
-        <div>
-          <% include ./forms/profileform %>
+    <div class="row">
+      
+      <p>
+        <h3>Your Username is: </h3><%= user.email %>
+      </p>
+
+      <dl class="tabs" data-tab>
+        <dd class="active"><a href="#newform">Current Info</a></dd>
+        <dd><a href="#profileform">Edit Profile</a></dd>
+      </dl>
+      <div class="tabs-content vertical">
+        <div class="content active" id="newform">
+          <p><% include ./forms/profileform %></p>
+        </div>
+        <div class="content" id="profileform">
+          <p><% include ./forms/profileformEdit %></p>
         </div>
       </div>
-          
+
     </div>
+    
+    <% include ../categoryButtons %>
+
   </div>
 
 <% include ../footer %>

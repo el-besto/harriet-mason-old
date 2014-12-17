@@ -1,0 +1,27 @@
+<form method="POST" action="/userdemog/<%=user.id %>">
+  <fieldset>
+    
+    <legend>User Details</legend>
+    
+    <label>username/primary email
+      <input type="text" name="" placeholder="" value="<%= user.email %>" disabled>
+    </label>
+    
+    <label>firstname
+      <input type="text" name="userDemog[firstName]" placeholder="first name" value="<%= user.userDemog.firstName %>">
+    </label>
+    
+    <label>lastname
+      <input type="text" name="userDemog[lastName]" placeholder="last name" value="<%= user.userDemog.lastName %>">
+    </label>
+
+    <label>suffix
+      <input type="text" name="userDemog[suffix]" placeholder="suffix, e.g. Jr, III, MD, JD" value="<%= user.userDemog.suffix %>">
+    </label>
+
+    
+
+    <button class="success expand">save</button>
+  
+  </fieldset>
+</form>
