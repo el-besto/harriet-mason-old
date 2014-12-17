@@ -2,76 +2,122 @@
 <% include ../layouts/header %>
 
 <div class="row">
-  <div class="large-9 columns">
+  <div class="small-12 columns">
     
     <h1><%= event.name.text %></h1>
   
   </div>
 </div>
 
-<!-- <div class="row">
-  <div class="large-9 columns">
-    
-    <img src="img/e122.jpg" alt="" />
-  
-  </div>
-</div> -->
-
 <div class="row">
-  <div class="large-9 columns">
+  <div class="small-12 columns">
     
-    <h2>Event Details</h2>
-
-    <div class="panel callout">
-      <%= event.description.text %>
+    <div class="callout">
+      Ple
     </div>
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="large-9 columns">
-    
-    <div class="large-5 columns">
-      <p>
-        date: <%= event.start.local %> to <%= event.end.local %> <br>
-        <em>how I would like to to look </em><br>
-        Saturday April 18, 2015 <br>
-        2:00 PM - 4:30 PM
-      </p> 
-    </div>
-
-    <div class="large-4 columns">
-      <p>
-        <%= weather.current_observation.temperature_string %>
-      </p>
-    </div>
-
-  </div> 
-</div>
-  
-
-<div class="row">
-  <div class="large-9 columns">
-    <div class="panel">
-      <a href="https://www.meriwethersnw.com/contact-hours">
-        <b><%= event.venue.name %></b>
-      </a><br>
-      <%= event.venue.address.address_1 %> <br>
-      <%= event.venue.address.city %>, 
-      <%= event.venue.address.region %> 
-      <%= event.venue.address.postal_code %> <br>
-      telephone: (503) 228-1250
-    </div>
-
     <div>
       <a href="<%= event.url %>" target="_blank"><button class="expand">RSVP on Eventbrite</button></a>
     </div>
-
-    <div>
-      <a href="https://www.google.com/maps/dir/'current location'/meriwether's+restaurant+portland/data=!4m5!4m4!1m0!1m2!1m1!1s0x549509e62b5ac591:0x97449a9cccde7661?sa=X&ei=GvONVJKmIsfroASixoCAAw&ved=0CJEBEPUXMA0" target="_blank"><button class="expand">Directions</button></a>
-    </div>
   
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="small-12 columns">
+    
+    <h2>
+      Event Details
+    </h2>
+    <p>
+      The main celebration for Harriet’s 85th birthday will be Saturday afternoon, April 18th from 2-4:30 at Meriwether’s Restaurant in Portland.
+    </p>
+    <p>
+      <strong>Light hors d’oevres will be served.  A no-host bar will serve drinks.</strong>
+    </p>
+    <p>
+      For those unable to attend in person, please sign the virtual <a href="/guestbook">guestbook</a>.  We also encourage submission of photos and other memorabilia to be included in the celebration.  
+    </p>
+    <p class="callout">
+      Please contact Aurelia (Harriet’s daughter) with any questions or items to be included.
+    </p>
+    <p style="text-align:center">
+      <a href="mailto:aurelia@powerfullatinas.com" >Aurelia@powerfullatinas.com</a> 
+    </p>
+
+
+    <hr>
+
+     
+
+    <dl class="tabs" data-tab>
+      <dd class="active"><a href="#eventKeyDetails">Key Details</a></dd>
+      <dd><a href="#eventLocation">Location</a></dd>
+      <dd><a href="#eventDirections">Directions</a></dd>
+      <dd><a href="#eventOrganizers">Organizers</a></dd>   
+    </dl>
+    
+    <div class="tabs-content">
+      
+      <div class="content  active" id="eventKeyDetails">
+        
+        <!-- <p><%= event.description.text %></p> -->
+        
+        <p>
+          The address is:  2602 NW Vaughn Street, Portland, OR
+        </p>
+        <p class="callout">
+          We will be showing a brief video showcasing some highlights from Harriet’s long, exciting life, and encouraging friends and family to share stories and warm memories.
+        </p>
+        <p>
+          For those coming from out of town, please check out our page specifically for Out of Town Guests.
+        </p>
+        <p>
+          date: <%= event.start.local %> to <%= event.end.local %> <br>
+          <em>how I would like to to look </em><br>
+          Saturday April 18, 2015 <br>
+          2:00 PM - 4:30 PM
+        </p>
+        <p>
+          Current Weather: <%= weather.current_observation.temperature_string %>
+        </p>
+      
+      </div>
+      
+      <div class="content" id="eventLocation">
+        
+        <div class="panel">
+          <a href="https://www.meriwethersnw.com/contact-hours">
+            <b><%= event.venue.name %></b>
+          </a><br>
+          <%= event.venue.address.address_1 %> <br>
+          <%= event.venue.address.city %>, 
+          <%= event.venue.address.region %> 
+          <%= event.venue.address.postal_code %> <br>
+          telephone: (503) 228-1250
+        </div>
+        <div>
+          <a href="https://www.google.com/maps/dir/'current location'/meriwether's+restaurant+portland/data=!4m5!4m4!1m0!1m2!1m1!1s0x549509e62b5ac591:0x97449a9cccde7661?sa=X&ei=GvONVJKmIsfroASixoCAAw&ved=0CJEBEPUXMA0" target="_blank"><button class="expand">Directions</button></a>
+        </div>
+
+      </div>
+      
+      <div class="content" id="eventDirections">
+
+        <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+
+      </div>
+
+      <div class="content" id="eventOrganizers">
+
+        <p>
+          Aurelia (Harriet’s daughter) is the contact person for questions about the event.  While most questions are probably answered by this website, please feel free to contact Aurelia at <a href="mailto:aurelia@powerfullatinas">Aurelia@powerfullatinas.com</a> if you have additional questions.
+        </p>
+
+      </div>
+      <!-- end tabs -->
+    
+    </div>
   </div>
 </div>
 

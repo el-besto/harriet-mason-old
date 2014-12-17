@@ -5,7 +5,25 @@
   
   <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
 
-    <h1>guestbook</h1>
+    <h1>GUESTBOOK</h1>
+    <p>
+      Harriet would love everyone – both those attending in person, as well as those who are unable to attend live – to sign the below “guest book” and share with her your memories of how you met, a special time you shared together, or something special you want to say to Harriet.
+    </p>
+    <p>
+      If you want to speak at the celebration, or submit material for the video (or this website!) please contact Aurelia.
+    </p>
+    <p>
+       <a href="mailto:aurelia@powerfullatinas">Aurelia@powerfullatinas.com</a>
+    </p>
+    <p>
+      Thanks in advance!
+    </p>
+
+    <a href="/guestbook/<%= user.id %>/new"><button class="success expand">post to guestbook</button></a>
+
+    <hr>
+
+
 
 <% postList.forEach( function (post) { %>
   
@@ -48,7 +66,6 @@
 
 <% })%>
 
-<a href="/guestbook/<%= user.id %>/new"><button class="success expand">post to guestbook</button></a>
           
     </div>
   </div>
