@@ -2,11 +2,23 @@
 <% include ../header %>
 
   <div class="row">
-    <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
+    <!-- <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns"> -->
       
-    <% include ./forms/loginform %>
-    
+    <dl class="tabs" data-tab>
+      <dd class="active"><a href="#loginform">Login</a></dd>
+      <dd><a href="#signupform">Signup</a></dd>
+    </dl>
+    <div class="tabs-content vertical">
+      <div class="content active" id="loginform">
+        <p><% include ./forms/loginform %></p>
+      </div>
+      <div class="content" id="signupform">
+        <p><% include ./forms/signupform %></p>
+      </div>
     </div>
+    
+    <!-- </div> -->
   </div>
 
 <% include ../footer %>
+
