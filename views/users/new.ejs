@@ -1,5 +1,5 @@
 <!--views/users/profile.ejs-->
-<% include ../header %>
+<% include ../layouts/header %>
 
 <div class="row">
   
@@ -13,15 +13,15 @@
   </dl>
   <div class="tabs-content vertical">
     <div class="content active" id="newform">
-      <p><% include ./forms/newform %></p>
+      <p><% include ../forms/newform %></p>
     </div>
     <div class="content" id="addressform">
-      <p><% include ./forms/addressform %></p>
+      <p><% include ../forms/addressform %></p>
     </div>
   </div>
 
 </div>
 
 
-<% include ../footer %>
+<% include ../layouts/footer %>
 

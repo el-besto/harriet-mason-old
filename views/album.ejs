@@ -1,5 +1,5 @@
 <!-- views/album.ejs taken from node-gallery module -->
-<% include header2 %>
+<% include ./layouts/header %>
 
 <% if (!album.isRoot){ %>
   <% for (var i=0; i<breadcrumb.length; i++) { %>
@@ -43,4 +43,4 @@
   </ul>
 <% } %>
 
-<% include footer %>
+<% include ./layouts/footer %>
