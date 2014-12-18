@@ -11,7 +11,7 @@
  **    bcrypt
  **    passport && passport-local
  **    cookie-session
- **    foundation front-end framework
+ **    foundation 5 front-end framework
  **
  *******************************************************************************
 *******************************************************************************/
