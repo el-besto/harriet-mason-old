@@ -17,7 +17,7 @@
 *******************************************************************************/
 
 var express        = require('express'),
-    PORT           = Number(process.env.PORT || 3000),
+    LOCALPORT      = 3000,
     bodyParser     = require('body-parser'),
     db             = require('./models'),
     pg             = require('pg'),
@@ -502,9 +502,9 @@ app.get('/gallery*', function(req, res){
  *******************************************************************************
 *******************************************************************************/
 db.sequelize.sync().then( function () {
-  var server = app.listen (PORT, function () {
+  var server = app.listen (process.env.PORT || LOCALPORT, function () {
     console.log ( new Array (50).join("*") );
-    console.log ( "\t listening \n\t\t localhost: " + PORT );
+    console.log ( "\t listening \n\t\t localhost: " + LOCALPORT );
     console.log ( new Array (50).join("*") );
   });
 });
