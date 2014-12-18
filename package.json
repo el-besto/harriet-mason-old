@@ -32,5 +32,8 @@
     "request": "^2.51.0",
     "sequelize": "^2.0.0-rc3",
     "walk": "^2.3.4"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }

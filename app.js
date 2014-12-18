@@ -17,7 +17,7 @@
 *******************************************************************************/
 
 var express        = require('express'),
-    PORT           = 3000,
+    PORT           = Number(process.env.PORT || 3000),
     bodyParser     = require('body-parser'),
     db             = require('./models'),
     passport       = require('passport'),
