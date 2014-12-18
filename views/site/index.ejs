@@ -1,40 +1,52 @@
 <!--views/site/index.ejs-->
 <% include ../layouts/header %>
+
+
+<!-- responsive welcome pictures     -->
+<div class="row">
+  <div class="small-12 columns centered">
+        
+    <div class="single-item responsive center">
+      <div><img src="img/e122.jpg" alt=""></div>
+      <div><img src="img/e125.jpg" alt=""></div>
+      <div><img src="img/e126.jpg" alt=""></div>
+    </div>
   
-  <div class="row">
+  </div>
+</div>
+
+
+<!-- wrapper   -->
+<div class="row">
+  <div class="small-12 columns centered">
     
-    <h1>Welcome to Harriet Mason's Site</h1>
-
-    <!-- <div class="small-12 small-centered medium-12 medium-centered large-12 large-centered columns"> -->
-      <div class="single-item responsive center">
-        <div><img src="img/e122.jpg" alt=""></div>
-        <div><img src="img/e125.jpg" alt=""></div>
-        <div><img src="img/e126.jpg" alt=""></div>
+    <!-- div filled with script js/flipclock -->
+    <!-- doesnt show up on iphone -->
+    <div class="row">
+      <div class="small-8 small-centered columns">
+        <div class="clock"></div>
       </div>
-   <!--  </div> -->
-  </div>
-
-  <div class="row">
-    <div class="small-10 small-centered medium-10 medium-centered large-10 large-centered columns">
-      
-      <!-- div filled with script js/flipclock -->
-      <div class="clock"></div>
-      
     </div>
-  </div>
 
-  <div class="row">
-    <div class="small-10 small-centered medium-10 medium-centered large-10 large-centered columns">
-      <p>with an overview of the birthday celebration idea</p>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="small-10 small-centered medium-10 medium-centered large-10 large-centered columns">
-      <a href="/travel"><button>Book Travel</button></a>
-      <button>Book Travel</button>
+    <!-- welcome message -->
+    <div class="row">
+      <div class="small-12 small-centered columns">
+        <div class="panel callout">
+          <p>
+            Please signup to provide contact info to Harriet, share your favorite memories in the <a href="/guestbook">guestbook</a> and browse through a wonderful collection of photos from years past and present!
+          </p>
+        </div>
+      </div>
     </div>
+
+
+    <!-- login/ signup form -->
+    <% include ../layouts/loginSignup %>
+
+<!-- /wrapper   -->    
   </div>
+</div>
 
 <% include ../layouts/footer %>
 
