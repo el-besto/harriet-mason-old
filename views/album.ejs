@@ -1,16 +1,20 @@
 <!-- views/album.ejs taken from node-gallery module -->
 <% include ./layouts/header2 %>
 
-
 <div class="row">
   <div class="small-12 columns">
-    
     <h1>GALLERY</h1>
+  </div>
+</div>
+
+<div class="row panel callout">
+  <div class="small-12 columns">
+
     <p>
       Below are some pictures from various times in Harriet’s life. Feel free to comment on any of the pictures, or contact Aurelia to add additional pictures.
     </p>
     <p>
-      <a href="mailto:aurelia@powerfullatinas">(Aurelia@powerfullatinas.com</a>
+      <a href="mailto:aurelia@powerfullatinas">Aurelia@powerfullatinas.com</a>
     </p>
   
   </div>
@@ -21,49 +25,92 @@
 <div class="row">
   <div class="small-12 columns">
     
+
+    <!-- setup breadcrumbs -->
     <% if (!album.isRoot){ %>
       <% for (var i=0; i<breadcrumb.length; i++) { %>
-      <% if (i==breadcrumb.length-1){ %>
-      <%= breadcrumb[i].name %>
-      <% }else{ %>
-      <a href="<%= breadcrumb[i].url %>"> <%= breadcrumb[i].name %> &raquo; </a>
-      <% } %>
+        
+        <ul class="breadcrumbs">
+        <% if (i==breadcrumb.length-1){ %>
+          <li><%= breadcrumb[i].name %></li>
+          </ul>
 
+        <% }else{ %>
+          <li>
+            <a href="<%= breadcrumb[i].url %>"> 
+              <%= breadcrumb[i].name %> &raquo; 
+            </a>
+          </li>
+
+        <% } %>
       <% } %>
     <% } %>
+    <!-- finish breadcrumbs  -->
     
-    <h3><%= album.prettyName %></h3>
-      <% if (album.description){ %>
-        <p><%- album.description %></p>
-      <% } %>
 
-      <% if (album.albums.length>0){ %>
-      <h3>Albums</h3>
-      <ul class="albums">
+
+
+    <!-- if there are any albums, then loop through and style...  -->
+    <% if (album.albums.length>0){ %>
+      <h2 class="subheader text-center">Albums</h2>
+      <div class="row" >
+      <div class="small-10 small-centered columns" >
+      
+      <ul class="small-block-grid-1">
+        
         <% album.albums.forEach(function(album){ %>
-          <li class="thumb">
-            <a href="<%= rootDir%>/<%= album.path%>">
-              <div class="image"><img src="/<%= directory %>/<%= album.thumb %>&tn=1" alt="<%= album.prettyName %>"><br /></div>
-              <span class="caption"><%= album.prettyName %></span>
+          <li>
+            <p><h3 class="subheader text-center"><%= album.prettyName %></h3></p>
+            <a class="th [radius]" href="<%= rootDir%>/<%= album.path%>">
+              <img src="/<%= directory %>/<%= album.thumb %>&tn=1" alt="<%= album.prettyName %>" >
             </a>
+
+            <!-- put a description in a row if there is a description -->
+            <% if (album.description){ %>
+              <div class="row">
+                <div class="small-12 columns">
+                  <div class="panel">
+                    <%- album.description %>
+                  </div>
+                </div>
+              </div>  
+            <% } %>
+
           </li>
+          <p></p>
         <% }) %>
+
       </ul>
+      </div>
+      </div>
     <% } %>
+    <!-- finish looping albums -->
     
+
+
+
+    <!-- if there are any photos, then loop through and style...  -->
     <% if (album.photos.length>0){ %>
-      <h2>Photos</h2>
-      <ul class="photos">
+      <h2 class="subheader text-center">Photos</h2>
+      <div class="row" >
+      <div class="small-10 small-centered columns" >
+      
+      <ul class="small-block-grid-1">
+        
+        <!-- loop photos and style -->
         <% album.photos.forEach(function(photo){ %>
-          <li class="thumb">
-            <a href="<%=rootDir %><%= photo.path %>">
-              <img src="/<%= directory %>/<%= photo.path %>&tn=1" alt="<%= photo.name%>"><br />
-              <%= photo.name%>
+          <li>
+            <a class="th [radius]" href="<%=rootDir %><%= photo.path %>">
+              <img src="/<%= directory %>/<%= photo.path %>&tn=1" alt="<%= photo.name%>"><p><h4 class="subheader text-center"><%= photo.name%></h4></p>
             </a>
           </li>
         <% }) %>
+      
       </ul>
+      </div>
+      </div>
     <% } %>
+    <!-- stop looping photos -->
   
   </div>
 </div>
