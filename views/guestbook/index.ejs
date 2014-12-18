@@ -1,74 +1,92 @@
 <!--views/guestbook.ejs-->
 <% include ../layouts/header %>
 
+<!-- welcomeWrapper  -->
 <div class="row">
-  
-  <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
+  <div class="small-12 columns">
 
-    <h1>GUESTBOOK</h1>
-    <p>
-      Harriet would love everyone – both those attending in person, as well as those who are unable to attend live – to sign the below “guest book” and share with her your memories of how you met, a special time you shared together, or something special you want to say to Harriet.
-    </p>
-    <p>
-      If you want to speak at the celebration, or submit material for the video (or this website!) please contact Aurelia.
-    </p>
-    <p>
-       <a href="mailto:aurelia@powerfullatinas">Aurelia@powerfullatinas.com</a>
-    </p>
-    <p>
-      Thanks in advance!
-    </p>
-
-    <a href="/guestbook/<%= user.id %>/new"><button class="success expand">post to guestbook</button></a>
+    <a href="/guestbook"><h1>GUESTBOOK</h1></a>
+    <h2 class="subheader">share a memory</h2>
+    
+    <!-- guestbook welcome -->
+    <div class="panel callout welcome">
+      <p>
+        Harriet would love everyone – both those attending in person, as well as those who are unable to attend live – to sign the below “guest book” and share with her:
+      </p>
+      <ul class="square">
+        <li>your memories of how you met</li>
+        <li>a special time you shared together</li>
+        <li>something special you want to say to Harriet.</li>
+      </ul>
+      <p>
+        Thanks in advance!
+      </p>
+      <p>
+        If you want to speak at the celebration, or submit material for the video (or this website!) please contact Aurelia.
+      </p>
+      <h5 class="text-center">
+         <a href="mailto:aurelia@powerfullatinas">Aurelia@powerfullatinas.com</a>
+      </h5>
+    </div>
+    
+    <!-- post to guestbook -->
+    <a href="/guestbook/<%= user.id %>/new">
+      <button class="success expand">post to guestbook</button></a>
 
     <hr>
+  </div>
+</div>
 
-
+<!-- postList wrapper -->
+<div class="row">
+  <div class="small-12 columns">
 
 <% postList.forEach( function (post) { %>
   
+  <% include ../layouts/postSingleBody %>
+
+  <!-- comments for a single post -->
   <div class="row">
-    
-    <div class="large-12 columns">
-      <h2><a href="/guestbook/posts/<%= post.id %>"><%= post.title %></a></h2>
-      <strong>< post.userDemog.firstName > < post.userDemog.lastName ></strong> wants to share:
-      
-      <div class="panel callout">
-        <%= post.content %>
+    <div class="small-12 columns">
+        
 
-        <ul class="inline-list">
-          <li><a href="">Reply</a></li>
-          <li><a href="">Share</a></li>
-        </ul>
-
-      </div>
+      <h6>Comments</h6>
+      <hr>
       
+      <!-- firstComment -->
       <div class="row">
-        <div class="large-12 large-centered columns">
-          
-          <h6>Comments</h6>
-          <hr>
-          <div class="row">
-            <div class="large-12 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
+        <div class="small-12 columns">
+          <div class="panel">
+            <p>Wow I remember that trip... It was amazing!!!!</p>
           </div>
-          <div class="row">
-            <div class="large-12 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-          </div>
-
         </div>
       </div>
-  
-    
+      <!-- /firstComment -->
+
+      <!-- secondComment -->
+      <div class="row">
+        <div class="small-12 columns">
+          <div class="panel">
+            <p>I cant believe that you still have that picture. I bet if we tried we could get someone to buy it.</p>
+          </div>
+        </div>
+      </div>
+      <!-- /secondComment -->
+
     </div>
   </div>
+  <!-- /comments for a single post -->
    
   <hr/>
 
+<!-- loop to next post -->
 <% })%>
 
           
-    </div>
   </div>
+</div>
+<!-- /postList wrapper -->
+
 
 <% include ../layouts/footer %>
 

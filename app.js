@@ -407,7 +407,7 @@ app.get('/guestbook', function (req, res) {
         console.log(err);
       });
   } else {
-    res.render ('site/about', { title: 'about', user : false    });
+    res.render ('layouts/pleaseLogin', { title: 'about', user : false    });
   }
 
 
@@ -444,15 +444,6 @@ app.get('/gifts', function (req, res) {
     res.render ('events/gifts', { title: 'gifts', user : req.user });
   } else {
     res.render ('events/gifts', { title: 'gifts', user : false });
-  }
-});
-
-// when a guest visits guestbook homepage
-app.get('/guestbook', function (req, res) {
-  if ( req.user ){
-    res.render ('events/guestbook', { title: 'guestbook', user : req.user });
-  } else {
-    res.render ('events/guestbook', { title: 'guestbook', user : false });
   }
 });
 

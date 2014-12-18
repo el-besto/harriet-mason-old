@@ -1,60 +1,32 @@
 <!--views/guestbook/show.ejs-->
 <% include ../layouts/header %>
 
-  <div class="row">
-    <div class="small-12 small-centered medium-8 medium-centered large-8 large-centered columns">
+<!-- wrapper  -->
+<div class="row">
+  <div class="small-12 columns">
 
-    <div class="row">
-      
-      <div class="large-12 columns">
-        <h2><%= post.title %></h2>
+    <a href="/guestbook"><h1>GUESTBOOK</h1></a>
 
-        <% if (post.userDemog !== null) { %>
-          
-          from <strong><%= post.userDemog.firstName %> <%= post.userDemog.lastName %></strong>
-        
-        <% } %>
-          
-          on <strong><%= post.createdAt %> </strong>
-        
-        <div class="panel callout single-post">
-          <%= post.content %>
-
-          <ul class="inline-list">
-            <li><a href="">Reply</a></li>
-            <li><a href="">Share</a></li>
-            <li><a href="mailto:<%= post.user.email %>">Email Author</a></li>
-          </ul>
-
-          <p>
-            <form method="post" action="/guestbook/<%= post.user.id %>/post/<%= post.id %>?_method=DELETE" ><button class="alert expand">delete</button></form>
-          </p>
-
-        </div>
-        
-        <div class="row">
-          <div class="large-12 large-centered columns comments">
-            
-            <h6>Comments</h6>
-            <hr>
-            <div class="row">
-              <div class="large-12 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-            </div>
-            <div class="row">
-              <div class="large-12 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-            </div>
-
-          </div>
-        </div>
+    <% include ../layouts/postSingleBody %>
     
-      
-      </div>
-    </div>
+    <!-- delete this post -->
+    <p>
+      <form method="post" action="/guestbook/<%= post.user.id %>/post/<%= post.id %>?_method=DELETE" ><button class="alert expand">delete entry</button></form>
+    </p>
 
+    <!-- HELP post to guestbook -->
+    <p>
+      <a href="/guestbook/<= user.id || '' HELP >/new">
+      <button class="success expand">post to guestbook</button></a>
+    </p>
 
-    
     </div>
   </div>
+</div>
+
+
+
+<hr>
 
 <% include ../layouts/footer %>
 

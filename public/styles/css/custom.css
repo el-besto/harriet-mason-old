@@ -2,6 +2,15 @@ h1{
   font-family: 'Noto Serif', serif;
 }
 
+body{
+    background: url("../../img/vintagePaper/TEXTURE A.jpg") no-repeat center center fixed;
+    background-size: cover;
+   /* min-width: 1024px;
+    min-height: 768px;
+    margin: 0 auto;*/
+    opacity: 0.85;
+    font-family: 'Noto Serif', serif;
+}
 /*from node-gallery theme.css*/
 
 

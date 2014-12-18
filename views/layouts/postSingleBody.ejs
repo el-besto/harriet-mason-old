@@ -1,0 +1,49 @@
+<!-- singlePost body -->
+<div class="row">
+  <div class="small-12 columns">
+    
+    <h2>
+      <a href="/guestbook/posts/<%= post.id %>">
+      <%= post.title %></a>
+    </h2>
+
+
+    <!-- include image if entered -->
+    <% if (post.img_url) {%>
+      <div class="row">
+        <div class="small-12 large-8 large-centered columns centered">
+              
+          <div class="single-item responsive center">
+            <div><img src="<%= post.img_url %>" alt=""></div>
+          </div>
+        
+        </div>
+      </div>
+    <% } %>
+
+    <!-- post.content -->
+    <div class="panel callout">
+      <p>
+        <%= post.content %>
+      </p>
+    </div>
+    
+    <!-- post Metadata -->
+    <p>
+      <strong>shared by:</strong> Angelo Cisneros <!-- HELP < post.userDemog.firstName > < post.userDemog.lastName > -->
+      <br>
+      <strong>tags:</strong>
+      <span class="[success secondary] [round radius] label">1992</span>
+      <span class="[success secondary] [round radius] label">portland</span>
+    </p>
+      
+      <!-- reply or share this comment -->
+      <!-- <ul class="inline-list">
+        <li><a href="">Reply</a></li>
+        <li><a href="">Share</a></li>
+      </ul> -->
+    
+
+    </div>
+  </div>
+<!-- /singlePost body -->

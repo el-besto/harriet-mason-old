@@ -1,0 +1,33 @@
+<!-- views/layouts/pleaseLogin -->
+<% include ../layouts/header %>
+
+<!-- wrapper  -->
+<div class="row">
+  <div class="small-12 columns">
+
+    
+    <h1>
+      You Must be Logged in to see Guestbook... 
+    </h1>
+
+    <div class="panel callout">
+      <p>
+        Please sign in or register below.
+      </p>
+    </div>
+    
+    <!-- login and signin forms -->
+    <p>
+      <% include ../forms/loginform %>
+    </p>
+
+    <hr>
+    
+    <p>
+      <% include ../forms/signupform %>
+    </p>
+    
+  </div>
+</div>
+
+<% include ../layouts/footer %>
