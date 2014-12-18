@@ -8,8 +8,31 @@
   Why: Done as a first project for General Assembly's WDI program.
 </p>
 
-# SCOPE
+## KEY LINKS
+[github repo](https://github.com/el-besto/harriet-mason)
+[heroku]()
 
+
+
+## KEY Deliverables
+    - "A plan for your pages"  - see scope
+    - "A well-defined and written out feature list" 
+    - "A written Minimum Viable Product (MVP)"
+    - "A list project milestones"
+
+
+
+# MVP
+    Design a site for my gma's 85 birthday celebration where invitees can access important links to attend the event (EVENT) and a way for them to share their favorite memories with her (GUESTBOOK). Only registered users should be able to post to the Guestbook for two reasons:
+    1. We need to keep the messages secure, as they may contain private information, and
+    2. We do not want random people on the web 'trolling' the site
+
+    It would be nice to be able to upload photos, and comment on them, but its not a requirement
+    It would be nice to register for Eventbrite directly through a front-end form in the app, but its not a requirement.
+
+
+
+# SCOPE
 ### Share Birthday Celebration Details, Provide Additional Resources for Invitees
 > View event details on event homepage
 > Link RSVP on Eventbrite (pull data from Eventbrite API)
@@ -46,6 +69,10 @@
 > Deploy and host on Heroku
 
 
+
+
+
+
 # MILESTONES
 
 ### Github
@@ -58,7 +85,7 @@
 > Draw Gallery pages (albums, single photo)
 > Draw Event pages 
 > Draw User profile page
-> [Wireframes]()
+> [Wireframes](https://trello.com/c/TZZoQMwp/30-wireframes)
 
 ### Database
 > Draw simple ERD, include fields (pen-and-paper, Omnigraffle later)
@@ -113,7 +140,8 @@
 - Views Templating: breakup HTML into partials ('view engine': 'ejs' )
 - Layouts Templating: breakup into partials (header, footer, forms)
 - Routes Modularization: *still to do* 
-- Add Easter egg to 
+- Add Easter egg to login form (great video of illustrious 'pun intended' Bob Ross helpinng explaining why those clouds are such [Happy Little Clouds](https://www.youtube.com/watch?v=YLO7tCdBVrA))
+- Comment up all the code!!!
 
 ### Deploy
 Heroku
