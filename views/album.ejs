@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="small-12 columns">
-    <h1>GALLERY</h1>
+    <h1>MEMORY GALLERY</h1>
   </div>
 </div>
 
@@ -28,9 +28,8 @@
 
     <!-- setup breadcrumbs -->
     <% if (!album.isRoot){ %>
+      <ul class="breadcrumbs">
       <% for (var i=0; i<breadcrumb.length; i++) { %>
-        
-        <ul class="breadcrumbs">
         <% if (i==breadcrumb.length-1){ %>
           <li><%= breadcrumb[i].name %></li>
           </ul>
@@ -38,7 +37,7 @@
         <% }else{ %>
           <li>
             <a href="<%= breadcrumb[i].url %>"> 
-              <%= breadcrumb[i].name %> &raquo; 
+              <%= breadcrumb[i].name %> 
             </a>
           </li>
 
@@ -46,13 +45,16 @@
       <% } %>
     <% } %>
     <!-- finish breadcrumbs  -->
+  </div>
+</div>
     
-
+<div class="row">
+  <div class="small-12 columns">
 
 
     <!-- if there are any albums, then loop through and style...  -->
     <% if (album.albums.length>0){ %>
-      <h2 class="subheader text-center">Albums</h2>
+      <h2 class="subheader text-center"><strong>Albums</strong></h2>
       <div class="row" >
       <div class="small-10 small-centered columns" >
       
@@ -60,7 +62,7 @@
         
         <% album.albums.forEach(function(album){ %>
           <li>
-            <p><h3 class="subheader text-center"><%= album.prettyName %></h3></p>
+            <p><h3 class="subheader text-center"><em><%= album.prettyName %></em></h3></p>
             <a class="th [radius]" href="<%= rootDir%>/<%= album.path%>">
               <img src="/<%= directory %>/<%= album.thumb %>&tn=1" alt="<%= album.prettyName %>" >
             </a>
@@ -91,7 +93,8 @@
 
     <!-- if there are any photos, then loop through and style...  -->
     <% if (album.photos.length>0){ %>
-      <h2 class="subheader text-center">Photos</h2>
+      <hr>
+      <h2 class="subheader text-center"><strong>Photos</strong></h2>
       <div class="row" >
       <div class="small-10 small-centered columns" >
       

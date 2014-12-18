@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="small-12 columns">
-    <h1>GALLERY</h1>
+    <h1>MEMORY GALLERY</h1>
   </div>
 </div>
 
@@ -23,7 +23,7 @@
     <% }else{ %>
       <li>
         <a href="<%= breadcrumb[i].url %>"> 
-          <%= breadcrumb[i].name %> &raquo; 
+          <%= breadcrumb[i].name %>  
         </a>
       </li>
 
@@ -35,26 +35,30 @@
 
 
   <!-- photo style -->
-  <ul class="small-block-grid-1">
-    
-    <li>
-      <img src="/<%= directory %>/<%= photo.path %>" alt="<%= photo.name%>"><p><h4 class="subheader text-center"><%= photo.name%></h4></p>
-    </li>
-  
-  </ul>
-
   <% if (photo.exif && photo.exif.Description){ %>
     <div class="row">
-      <div class="panel"><%= photo.exif.Description%></div>      
+      <div class="small-12 columns">
+        <div class="panel"><strong>Description: </strong> <%= photo.exif.Description%></div>      
+      </div>
     </div>
   <% }else{ %>
     <div class="row">
       <div class="small-12 columns">
-        <div class="panel"><%= photo.name%></div>
+        <h2 class="subheader"> <strong><%= photo.name%></strong></h2>
+        <div class="panel"><strong>Description: </strong> <%= photo.exif.Description || "No Description" %></div>
       </div>
     </div>
 
   <% } %>
+
+
+  <ul class="small-block-grid-1">
+    
+    <li>
+      <img src="/<%= directory %>/<%= photo.path %>" alt="<%= photo.name%>">
+    </li>
+  
+  </ul>
   <!-- finish photo styles... -->
 
 
